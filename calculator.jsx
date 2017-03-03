@@ -5,6 +5,7 @@ class Calculator extends React.Component {
     super(props);
     this.state = {result: 0, num1: "", num2: ""};
     this.operator = this.operator.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
 
@@ -39,16 +40,27 @@ class Calculator extends React.Component {
   }
 
 
+  clear(event){
+    event.preventDefault();
+    this.setState({
+      ["result"]: 0, ["num1"]:  "", ["num2"]: ""
+    });
+
+    document.getElementById("nums").value = "";
+    document.getElementById("nums2").value = "";
+  }
+
 
   render() {
     return (
       <div>
         <h1>{this.state.result}</h1>
 
-      <input className="num1" onChange={this.updateNum("num1")}></input>
-      <input className="num2" onChange={this.updateNum("num2")}></input>
-      <br></br>
-      <button className="add"onClick={this.operator}>+</button>
+      <input id="nums" className="num1" onChange={this.updateNum("num1")}></input>
+      <input id="nums2" className="num2" onChange={this.updateNum("num2")}></input>
+      <button className="clear" onClick={this.clear}>Clear!</button>
+      <br/>
+      <button className="add" onClick={this.operator}>+</button>
       <button className="subtract" onClick={this.operator}>-</button>
       <button className="multiply" onClick={this.operator}>*</button>
       <button className="divide" onClick={this.operator}>/</button>
